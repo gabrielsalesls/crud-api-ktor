@@ -1,17 +1,17 @@
 package gabrielsalesls.github.io
 
-import gabrielsalesls.github.io.plugins.*
+import gabrielsalesls.github.io.dao.DatabaseFactory
+import gabrielsalesls.github.io.plugins.configureRouting
+import gabrielsalesls.github.io.plugins.configureSerialization
 import io.ktor.server.application.*
-import io.ktor.server.engine.*
 import io.ktor.server.netty.*
 
-fun main() {
-    embeddedServer(Netty, port = 8080, host = "0.0.0.0", module = Application::module)
-        .start(wait = true)
+fun main(args: Array<String>) {
+    EngineMain.main(args)
 }
 
 fun Application.module() {
+    DatabaseFactory.init(environment.config)
     configureSerialization()
-    configureDatabases()
     configureRouting()
 }

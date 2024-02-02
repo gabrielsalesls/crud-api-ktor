@@ -6,6 +6,7 @@ val logback_version: String by project
 val exposed_version: String by project
 val h2_version: String by project
 val hikaricp_version: String by project
+val koin_version: String by project
 
 plugins {
     kotlin("jvm") version "1.9.22"
@@ -41,6 +42,8 @@ dependencies {
     implementation("io.ktor:ktor-server-netty-jvm")
     implementation("ch.qos.logback:logback-classic:$logback_version")
     implementation("com.zaxxer:HikariCP:$hikaricp_version")
+    implementation("io.insert-koin:koin-ktor:$koin_version")
+    implementation("io.insert-koin:koin-logger-slf4j:$koin_version")
     testImplementation("io.ktor:ktor-server-tests-jvm")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
 }

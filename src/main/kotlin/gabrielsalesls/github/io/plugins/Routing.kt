@@ -1,20 +1,16 @@
 package gabrielsalesls.github.io.plugins
 
-import io.ktor.http.*
+import gabrielsalesls.github.io.routes.placesRoutes
+import gabrielsalesls.github.io.service.PlaceService
 import io.ktor.server.application.*
-import io.ktor.server.plugins.statuspages.*
-import io.ktor.server.response.*
 import io.ktor.server.routing.*
+import org.koin.ktor.ext.inject
 
 fun Application.configureRouting() {
-    install(StatusPages) {
-        exception<Throwable> { call, cause ->
-            call.respondText(text = "500: $cause" , status = HttpStatusCode.InternalServerError)
-        }
-    }
     routing {
-        get("/hello") {
-            call.respondText("Hello")
-        }
+
+        val placeService by inject<PlaceService>()
+
+        placesRoutes(placeService)
     }
 }
